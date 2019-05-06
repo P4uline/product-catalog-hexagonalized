@@ -1,0 +1,6 @@
+@import fr.catalog.infra.controllers.Action
+@(actions: List[Action])
+
+@for(action <- actions) {
+    @action <br/>
+}

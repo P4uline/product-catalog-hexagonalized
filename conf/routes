@@ -1,0 +1,20 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                                   fr.catalog.infra.controllers.HomeController.index
+GET     /products                           fr.catalog.infra.controllers.CatalogController.findAllItems
+GET     /product/:ean                       fr.catalog.infra.controllers.CatalogController.detail(ean:String)
+DELETE  /product/:ean                       fr.catalog.infra.controllers.CatalogController.delete(ean:String)
+GET     /products/new                       fr.catalog.infra.controllers.CatalogController.newItem
+POST    /product/new                        fr.catalog.infra.controllers.CatalogController.submitNewItem
+POST    /product/edit                       fr.catalog.infra.controllers.CatalogController.submitEditItem(ean:String)
+GET     /product/edit/:ean                  fr.catalog.infra.controllers.CatalogController.editItem(ean:String)
+GET     /picture/:ean                       fr.catalog.infra.controllers.CatalogController.picture(ean:String)
+GET     /products/csv/loadSamples           fr.catalog.infra.controllers.CatalogController.loadSamples()
+GET     /products/csv/prepareLoadSamples    fr.catalog.infra.controllers.CatalogController.prepareLoadSamples()
+
+GET     /events                             fr.catalog.infra.controllers.ActionController.listActions()
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
