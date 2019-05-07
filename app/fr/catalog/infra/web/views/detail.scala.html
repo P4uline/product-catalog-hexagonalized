@@ -1,5 +1,5 @@
-@import fr.catalog.infra.controllers.Item
-@import fr.catalog.infra.controllers.Action
+@import fr.catalog.infra.web.Item
+@import fr.catalog.infra.web.Action
 @(item: Item, actions: List[Action])
 
 @main("Edit item") {
@@ -11,17 +11,17 @@
                     <div class="media">
                         <div class="media-left media-middle">
                             <a href="#">
-                                <img class="img-responsive img-rounded" src="@fr.catalog.infra.controllers.routes.CatalogController.picture(item.number)" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.controllers.routes.CatalogController.editItem(item.number)">
+                                <img class="img-responsive img-rounded" src="@fr.catalog.infra.web.routes.CatalogController.picture(item.number)" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
                             </a>
                         </div>
                     </div>
                 }
                 @if(item.imageUrl != null) {
-                    <img class="square-image" src="@routes.Assets.versioned("images" + item.imageUrl)" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.controllers.routes.CatalogController.editItem(item.number)">
+                    <img class="square-image" src="@routes.Assets.versioned("images" + item.imageUrl)" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
                 }
 
                 @if(item.imageUrl == null && item.image == null) {
-                    <img class="square-image" src="@routes.Assets.versioned("images/latest-home-wallpaper_015623955_147.jpg")" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.controllers.routes.CatalogController.editItem(item.number)">
+                    <img class="square-image" src="@routes.Assets.versioned("images/latest-home-wallpaper_015623955_147.jpg")" style="max-height: 800px; max-width: 800px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
                 }
             </div>
             <div class="col">
@@ -57,7 +57,7 @@
                 method: 'DELETE'
             }).done(function() {
                 console.log("Product " + ean + " deleted with success !");
-                window.location.href = "@fr.catalog.infra.controllers.routes.CatalogController.findAllItems()"
+                window.location.href = "@fr.catalog.infra.web.routes.CatalogController.findAllItems()"
             });
         }
 </script>

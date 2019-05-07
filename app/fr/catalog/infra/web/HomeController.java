@@ -1,10 +1,9 @@
-package fr.catalog.infra.controllers;
+package fr.catalog.infra.web;
 
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html.index;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -25,7 +24,7 @@ public class HomeController extends Controller {
 
         Messages messages = Http.Context.current().messages();
         String ready = messages.at("welcome.ready");
-        return ok(index.render(ready));
+        return ok(fr.catalog.infra.web.views.html.index.render(ready));
     }
 
 }

@@ -1,0 +1,43 @@
+
+@import fr.catalog.infra.web.Item
+@(items: List[Item])
+
+@main("List of items") {
+    <div class="container">
+        <h1>These are all the items</h1>
+
+        <p>Number of items : @items.size</p>
+
+
+        <div class="row">
+        @for(item <- items) {
+            <div class="col-md-4">
+                <div class="thumbnail">
+
+                    @if(item.image != null && item.imageUrl == null) {
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <a href="#">
+                                    <img class="img-responsive img-rounded" src="@fr.catalog.infra.web.routes.CatalogController.picture(item.number)" style="max-height: 200px; max-width: 200px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    @if(item.imageUrl != null) {
+                        <img class="square-image" src="@routes.Assets.versioned("images" + item.imageUrl)" style="max-height: 200px; max-width: 200px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
+                    }
+
+                    @if(item.imageUrl == null && item.image == null) {
+                        <img class="square-image" src="@routes.Assets.versioned("images/latest-home-wallpaper_015623955_147.jpg")" style="max-height: 200px; max-width: 200px;" alt="Image test" onclick="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)">
+                    }
+
+                <div class="caption">
+                    <a href="@fr.catalog.infra.web.routes.CatalogController.editItem(item.number)"><p>@item.name<br/>@item.description</p></a>
+                    <a href="@fr.catalog.infra.web.routes.CatalogController.detail(item.number)"><p>Details</p></a>
+                </div>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+}

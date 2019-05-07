@@ -1,4 +1,4 @@
-package fr.catalog.infra.controllers;
+package fr.catalog.infra.web;
 
 import fr.catalog.business.PortEventService;
 import play.mvc.Controller;
@@ -13,6 +13,6 @@ public class ActionController extends Controller {
     private PortEventService eventService;
 
     public Result listActions() {
-        return ok(views.html.listAction.render(eventService.findEvents().stream().map(e -> Action.toAction(e)).collect(Collectors.toList())));
+        return ok(fr.catalog.infra.web.views.html.listAction.render(eventService.findEvents().stream().map(e -> Action.toAction(e)).collect(Collectors.toList())));
     }
 }

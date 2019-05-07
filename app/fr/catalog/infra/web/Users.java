@@ -1,4 +1,4 @@
-package fr.catalog.infra.controllers;
+package fr.catalog.infra.web;
 
 import fr.catalog.business.User;
 

@@ -1,6 +1,6 @@
 package fr.catalog.business;
 
-import fr.catalog.infra.controllers.Users;
+import fr.catalog.infra.web.Users;
 import fr.catalog.infra.dao.EventEntity;
 
 import javax.inject.Inject;

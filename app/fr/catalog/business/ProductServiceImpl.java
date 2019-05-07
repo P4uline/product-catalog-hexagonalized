@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static fr.catalog.business.Event.EventType.*;
-import static fr.catalog.infra.controllers.Users.getCurrentUser;
+import static fr.catalog.infra.web.Users.getCurrentUser;
 
 public class ProductServiceImpl implements PortProductCatalogService {
     

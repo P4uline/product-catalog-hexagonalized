@@ -1,4 +1,4 @@
-package fr.catalog.infra.controllers;
+package fr.catalog.infra.web;
 
 import com.google.common.io.Files;
 import fr.catalog.business.PortProductCatalogService;
@@ -33,34 +33,32 @@ public class CatalogController extends Controller {
     }
 
     public Result findAllItems() {
-        return ok(views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
+        return ok(fr.catalog.infra.web.views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
     }
 
     public Result newItem() {
-        return ok(views.html.newItem.render(playForm.form(Item.class)));
+        return ok(fr.catalog.infra.web.views.html.newItem.render(playForm.form(Item.class)));
     }
 
     public Result detail(String ean) {
-        List<Action> actions = eventService.findEvents().stream().map(e -> Action.toAction(e)).collect(Collectors.toList());
-        List<Action> finalActions = actions;
+        List<Action> finalActions = eventService.findEvents().stream().map(e -> Action.toAction(e)).collect(Collectors.toList());
 
-        // TODO : product with events and separate it to the view
         Optional<Item> optionalItem =  portProductcatalogService.findProductByEan(ean).map(p -> Item.toItem(p));
         return optionalItem //
-                .map( item -> ok(views.html.detail.render(item, finalActions))) //
+                .map( item -> ok(fr.catalog.infra.web.views.html.detail.render(item, finalActions))) //
                 .orElseGet(() -> notFound("Le produit '" + ean + "' n'a pas été trouvé")); //
     }
 
     public Result editItem(String ean) {
         return portProductcatalogService.findProductByEan(ean) //
-                .map( product -> ok(views.html.editItem.render(playForm.form(Item.class).fill(Item.toItem(product))))) //
+                .map( product -> ok(fr.catalog.infra.web.views.html.editItem.render(playForm.form(Item.class).fill(Item.toItem(product))))) //
                 .orElseGet(() -> notFound("Le produit '" + ean + "' n'a pas été trouvé")); //
     }
 
     public Result submitEditItem(String ean) {
         Form<Item> itemForm = playForm.form(Item.class).bindFromRequest();
         if (itemForm.hasErrors()) {
-            return badRequest(views.html.editItem.render(itemForm));
+            return badRequest(fr.catalog.infra.web.views.html.editItem.render(itemForm));
         }
         Item item = itemForm.get();
         Http.MultipartFormData.FilePart<File> picture = request().body().<File>asMultipartFormData().getFile("picture");
@@ -71,13 +69,13 @@ public class CatalogController extends Controller {
         item.image = getBytesFromFile(picture);
         portProductcatalogService.updateProduct(Item.toProduct(item));
         flash("success", "New product created");
-        return ok(views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
+        return ok(fr.catalog.infra.web.views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
     }
 
     public Result submitNewItem() {
         Form<Item> itemForm = playForm.form(Item.class).bindFromRequest();
         if (itemForm.hasErrors()) {
-            return badRequest(views.html.newItem.render(itemForm));
+            return badRequest(fr.catalog.infra.web.views.html.newItem.render(itemForm));
         }
         Item item = itemForm.get();
         Http.MultipartFormData.FilePart<File> picture = request().body().<File>asMultipartFormData().getFile("image");
@@ -88,7 +86,7 @@ public class CatalogController extends Controller {
         item.image = getBytesFromFile(picture);
         portProductcatalogService.registerNewProduct(Item.toProduct(item));
         flash("success", "New item created");
-        return ok(views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
+        return ok(fr.catalog.infra.web.views.html.list.render(portProductcatalogService.allProducts().stream().map(p -> Item.toItem(p)).collect(Collectors.toList())));
     }
 
     private byte[] getBytesFromFile(Http.MultipartFormData.FilePart<File> picture) {
@@ -114,11 +112,11 @@ public class CatalogController extends Controller {
     public Result delete(String ean) {
         portProductcatalogService.deleteProduct(ean);
         flash("success", "Product deleted");
-        return redirect(fr.catalog.infra.controllers.routes.CatalogController.findAllItems());
+        return redirect(fr.catalog.infra.web.routes.CatalogController.findAllItems());
     }
 
     public Result prepareLoadSamples() {
-        return ok(views.html.prepareLoadSamples.render());
+        return ok(fr.catalog.infra.web.views.html.prepareLoadSamples.render());
     }
 
     public Result loadSamples() {
@@ -126,7 +124,7 @@ public class CatalogController extends Controller {
         portProductcatalogService.loadFromFile(filename);
         
         flash("success", "Loaded a CSV file");
-        return redirect(fr.catalog.infra.controllers.routes.CatalogController.findAllItems());
+        return redirect(fr.catalog.infra.web.routes.CatalogController.findAllItems());
     }
 
 }

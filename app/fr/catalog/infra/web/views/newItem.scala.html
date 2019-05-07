@@ -1,11 +1,11 @@
-@import fr.catalog.infra.controllers.Item
+@import fr.catalog.infra.web.Item
 @(myForm: Form[Item])
 
 @main("New product") {
     <div class="container">
         <h1>Let's create an amazing product</h1>
         <div class="row">
-        @helper.form(action = helper.CSRF(fr.catalog.infra.controllers.routes.CatalogController.submitNewItem()), 'enctype -> "multipart/form-data") {
+        @helper.form(action = helper.CSRF(fr.catalog.infra.web.routes.CatalogController.submitNewItem()), 'enctype -> "multipart/form-data") {
             <div class="form-group">
                 <div class="form-row">
                     @helper.inputText(myForm("ean"))
