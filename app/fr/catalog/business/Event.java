@@ -1,7 +1,5 @@
 package fr.catalog.business;
 
-import play.data.validation.Constraints;
-
 public class Event {
 
     public static Event newEvent(Event.EventType type, String ean, String owner) {
@@ -20,13 +18,10 @@ public class Event {
         CHANGE_USER_ACCESS;
     }
 
-    @Constraints.Required
     public Event.EventType type;
 
-    @Constraints.Required
     public final String ean;
 
-    @Constraints.Required
     public final String owner;
 
     protected Event(Event.EventType eventType, String ean, String owner) {
