@@ -24,8 +24,8 @@ public class Module extends AbstractModule {
     @Override
     public void configure() {
         bind(PortEventService.class).to(EventServiceImpl.class);
-        bind(PortEventDao.class).to(EbeanEventDao.class);
         bind(PortProductCatalogService.class).to(ProductServiceImpl.class);
+        bind(PortEventDao.class).to(EbeanEventDao.class);
         bind(PortProductDao.class).to(EbeanProductDao.class);
         bind(PortFileGateway.class).to(FilesystemGatewayAdapter.class);
     }
