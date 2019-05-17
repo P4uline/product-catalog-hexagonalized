@@ -28,6 +28,6 @@ public class Item {
     }
 
     public static Item toItem(Product product) {
-        return new Item(product.ean, product.name, product.description, product.picture, product.pictureUrl);
+        return new Item(product.getEan(), product.getName(), product.getDescription(), product.getPicture(), product.getPictureUrl());
     }
 }

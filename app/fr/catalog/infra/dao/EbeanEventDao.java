@@ -21,6 +21,6 @@ public class EbeanEventDao implements PortEventDao {
 
     @Override
     public void save(Event event) {
-        newEventEntity(EventEntity.toEventEntityType(event.type), event.ean, event.owner).save();
+        newEventEntity(EventEntity.toEventEntityType(event.getType()), event.getEan(), event.getOwner()).save();
     }
 }

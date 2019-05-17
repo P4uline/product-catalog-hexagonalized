@@ -105,7 +105,7 @@ public class CatalogController extends Controller {
 
     public Result picture(String ean) {
         return portProductcatalogService.findProductByEan(ean) //
-                .map(product -> ok(product.picture)) //
+                .map(product -> ok(product.getPicture())) //
                 .orElseGet(() -> ok(Play.current().getFile("public/images/favicon.png"))); //
     }
 

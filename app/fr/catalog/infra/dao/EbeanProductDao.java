@@ -16,7 +16,7 @@ public class EbeanProductDao implements PortProductDao {
     
     @Override
     public void save(Product product) {
-        newProductEntity(product.ean, product.name, product.description).save();
+        newProductEntity(product.getEan(), product.getName(), product.getDescription()).save();
     }
 
     @Override

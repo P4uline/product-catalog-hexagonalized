@@ -18,11 +18,11 @@ public class Event {
         CHANGE_USER_ACCESS;
     }
 
-    public Event.EventType type;
+    private Event.EventType type;
 
-    public final String ean;
+    private final String ean;
 
-    public final String owner;
+    private final String owner;
 
     protected Event(Event.EventType eventType, String ean, String owner) {
         this.type = eventType;
@@ -32,5 +32,17 @@ public class Event {
 
     public String toString() {
         return "[" + owner + " - " + ean + " - " + type.name() + "]";
+    }
+
+    public EventType getType() {
+        return type;
+    }
+    
+    public String getEan() {
+        return ean;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }
