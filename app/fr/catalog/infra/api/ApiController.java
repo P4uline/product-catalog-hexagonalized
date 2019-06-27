@@ -22,7 +22,7 @@ public class ApiController extends AbstractController {
 
     public Result consulterDossier(String ean) {
         return portProductCatalogService.findProductByEan(ean) //
-                .map( p -> Results.ok(Json.toJson(ApiProductDTO.newApiProductDTO(p.ean, p.name, p.description, p.picture)))) //
+                .map( p -> Results.ok(Json.toJson(ApiProductDTO.newApiProductDTO(p.getEan(), p.getName(), p.getDescription(), p.getPicture())))) //
                 .orElseGet(() -> notFound("Le produit '" + ean + "' n'a pas été trouvé")); //
     }
 

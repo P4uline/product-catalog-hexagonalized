@@ -16,7 +16,7 @@ public class Action {
     }
 
     public static Action toAction(Event event) {
-        return newAction(toActionType(event.type), event.ean, event.owner);
+        return newAction(toActionType(event.getType()), event.getEan(), event.getOwner());
     }
 
     private static Type toActionType(Event.EventType eventType) {

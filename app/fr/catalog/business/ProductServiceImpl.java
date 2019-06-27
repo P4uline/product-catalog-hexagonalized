@@ -25,7 +25,7 @@ public class ProductServiceImpl implements PortProductCatalogService {
     
     @Override
     public void registerNewProduct(Product product) {
-        eventService.createNewEvent(CREATE_PRODUCT, product.ean, getCurrentUser().getName());
+        eventService.createNewEvent(CREATE_PRODUCT, product.getEan(), getCurrentUser().getName());
         productDao.save(product);
     }
 
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements PortProductCatalogService {
 
     @Override
     public void updateProduct(Product product) {
-        eventService.createNewEvent(EDIT_PRODUCT, product.ean, getCurrentUser().getName());
+        eventService.createNewEvent(EDIT_PRODUCT, product.getEan(), getCurrentUser().getName());
         productDao.save(product);
     }
 
