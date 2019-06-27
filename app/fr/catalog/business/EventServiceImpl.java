@@ -17,9 +17,9 @@ public class EventServiceImpl implements PortEventService {
         return eventDao.findAllEvent().stream().filter(e -> {
             if (!currentUser.getRole().equals(User.Role.ADMIN)) {
                 if (currentUser.getRole().equals(User.Role.GESTIONAIRE)) {
-                    return !e.type.equals(EventEntity.EventType.CHANGE_USER_ACCESS) && e.owner.equals(currentUser.getName());  
+                    return !e.getType().equals(EventEntity.EventType.CHANGE_USER_ACCESS) && e.getOwner().equals(currentUser.getName());  
                 } else if (currentUser.getRole().equals(User.Role.SUPER_GESTIONNAIRE)) {
-                    return !e.type.equals(EventEntity.EventType.CHANGE_USER_ACCESS);
+                    return !e.getType().equals(EventEntity.EventType.CHANGE_USER_ACCESS);
                 }
             }
             return true;
