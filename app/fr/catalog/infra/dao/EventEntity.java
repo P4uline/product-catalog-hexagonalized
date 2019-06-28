@@ -3,7 +3,6 @@ package fr.catalog.infra.dao;
 import fr.catalog.business.Event;
 import io.ebean.Finder;
 import io.ebean.Model;
-import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -92,13 +91,10 @@ public class EventEntity extends Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
-    @Constraints.Required
     public EventType type;
 
-    @Constraints.Required
     private final String ean;
 
-    @Constraints.Required
     public final String owner;
     
     protected EventEntity(EventType eventType, String ean, String owner) {
